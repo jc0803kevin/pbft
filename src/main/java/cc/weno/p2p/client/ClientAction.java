@@ -8,33 +8,15 @@ import cc.weno.dao.pbft.MsgType;
 import cc.weno.dao.pbft.PbftMsg;
 import cc.weno.util.*;
 import cn.hutool.db.Db;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.tio.core.ChannelContext;
+import org.tio.utils.json.Json;
 
 /**
- * //                            _ooOoo_
- * //                           o8888888o
- * //                           88" . "88
- * //                           (| -_- |)
- * //                            O\ = /O
- * //                        ____/`---'\____
- * //                      .   ' \\| |// `.
- * //                       / \\||| : |||// \
- * //                     / _||||| -:- |||||- \
- * //                       | | \\\ - /// | |
- * //                     | \_| ''\---/'' | |
- * //                      \ .-\__ `-` ___/-. /
- * //                   ___`. .' /--.--\ `. . __
- * //                ."" '< `.___\_<|>_/___.' >'"".
- * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
- * //                 \ \ `-. \_ __\ /__ _/ .-` / /
- * //         ======`-.____`-.___\_____/___.-`____.-'======
- * //                            `=---='
- * //
- * //         .............................................
- * //                  佛祖镇楼           BUG辟易
+
  *
- * @author: xiaohuiduan
+ * @author: kevin
  * @data: 2020/2/14 下午9:24
  * @description: 当client接受到消息时，会在这里进行处理
  */
@@ -76,6 +58,9 @@ public class ClientAction {
                 case MsgType.CHANGE_VIEW:
                     onChangeView(msg);
                     break;
+                case MsgType.PRE_PREPARE:
+                    prePrepare(msg);
+                    break;
                 case MsgType.PREPARE:
                     prepare(msg);
                     break;
@@ -104,6 +89,11 @@ public class ClientAction {
      * @param msg
      */
     private void prepare(PbftMsg msg) {
+        ClientUtil.clientPublish(msg);
+    }
+
+    private void prePrepare(PbftMsg msg){
+        log.info("prePrepare msg ->"+ JSON.toJSONString(msg));
         ClientUtil.clientPublish(msg);
     }
 

@@ -40,7 +40,7 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
 <!--                    打包位置-->
-                    <outputDirectory>C:\Users\XiaoHui\Desktop\windows</outputDirectory>
+                    <outputDirectory>E:\pbft</outputDirectory>
 
 
                 </configuration>

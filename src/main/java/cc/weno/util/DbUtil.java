@@ -17,35 +17,15 @@ import java.util.*;
 import static org.iq80.leveldb.impl.Iq80DBFactory.factory;
 
 /**
- * //                            _ooOoo_
- * //                           o8888888o
- * //                           88" . "88
- * //                           (| -_- |)
- * //                            O\ = /O
- * //                        ____/`---'\____
- * //                      .   ' \\| |// `.
- * //                       / \\||| : |||// \
- * //                     / _||||| -:- |||||- \
- * //                       | | \\\ - /// | |
- * //                     | \_| ''\---/'' | |
- * //                      \ .-\__ `-` ___/-. /
- * //                   ___`. .' /--.--\ `. . __
- * //                ."" '< `.___\_<|>_/___.' >'"".
- * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
- * //                 \ \ `-. \_ __\ /__ _/ .-` / /
- * //         ======`-.____`-.___\_____/___.-`____.-'======
- * //                            `=---='
- * //
- * //         .............................................
- * //                  佛祖镇楼           BUG辟易
+
  *
- * @author: xiaohuiduan
+ * @author: kevin
  * @data: 2020/3/1 上午12:13
  * @description: levelDB操作
  */
 @Slf4j
 public class DbUtil {
-    public static String dbFilePath;
+    public static String dbFilePath = "E:\\pbft\\test.db";
 
     private static DB db = null;
     private static Options options = new Options();

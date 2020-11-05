@@ -16,29 +16,9 @@ import cc.weno.p2p.common.MsgPacket;
 import java.nio.ByteBuffer;
 
 /**
- * //                            _ooOoo_
- * //                           o8888888o
- * //                           88" . "88
- * //                           (| -_- |)
- * //                            O\ = /O
- * //                        ____/`---'\____
- * //                      .   ' \\| |// `.
- * //                       / \\||| : |||// \
- * //                     / _||||| -:- |||||- \
- * //                       | | \\\ - /// | |
- * //                     | \_| ''\---/'' | |
- * //                      \ .-\__ `-` ___/-. /
- * //                   ___`. .' /--.--\ `. . __
- * //                ."" '< `.___\_<|>_/___.' >'"".
- * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
- * //                 \ \ `-. \_ __\ /__ _/ .-` / /
- * //         ======`-.____`-.___\_____/___.-`____.-'======
- * //                            `=---='
- * //
- * //         .............................................
- * //                  佛祖镇楼           BUG辟易
+
  *
- * @author: xiaohuiduan
+ * @author: kevin
  * @data: 2020/2/12 上午12:09
  * @description: 服务端的Handler
  */
@@ -97,7 +77,7 @@ public class P2PServerAioHandler implements ServerAioHandler {
      * @param tioConfig
      * @param channelContext
      * @return
-     * @author: xiaohuiduan
+     * @author: kevin
      */
     @Override
     public ByteBuffer encode(Packet packet, TioConfig tioConfig, ChannelContext channelContext) {
@@ -133,7 +113,7 @@ public class P2PServerAioHandler implements ServerAioHandler {
      * @param packet
      * @param channelContext
      * @throws Exception
-     * @author: xiaohuiduan
+     * @author: kevin
      */
     @Override
     public void handler(Packet packet, ChannelContext channelContext) throws Exception {
@@ -150,12 +130,12 @@ public class P2PServerAioHandler implements ServerAioHandler {
         if (!JSON.isValid(msg)) {
             return;
         }
-        log.info("服务端接受消息：" + msg);
         PbftMsg pbftMsg = JSON.parseObject(msg, PbftMsg.class);
         if (pbftMsg == null) {
             log.error("客户端将Json数据解析成pbft数据失败");
             return;
         }
+        log.info("服务端接受 node:[{}]消息", pbftMsg.getNode());
 
         if ((pbftMsg.getMsgType() != MsgType.CLIENT_REPLAY && pbftMsg.getMsgType() != MsgType.GET_VIEW) && !MsgUtil.afterMsg(pbftMsg)) {
             log.warn("数据检查签名或者解密失败");

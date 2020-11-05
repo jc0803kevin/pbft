@@ -23,29 +23,9 @@ import cc.weno.p2p.common.MsgPacket;
 import java.io.UnsupportedEncodingException;
 
 /**
- * //                            _ooOoo_
- * //                           o8888888o
- * //                           88" . "88
- * //                           (| -_- |)
- * //                            O\ = /O
- * //                        ____/`---'\____
- * //                      .   ' \\| |// `.
- * //                       / \\||| : |||// \
- * //                     / _||||| -:- |||||- \
- * //                       | | \\\ - /// | |
- * //                     | \_| ''\---/'' | |
- * //                      \ .-\__ `-` ___/-. /
- * //                   ___`. .' /--.--\ `. . __
- * //                ."" '< `.___\_<|>_/___.' >'"".
- * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
- * //                 \ \ `-. \_ __\ /__ _/ .-` / /
- * //         ======`-.____`-.___\_____/___.-`____.-'======
- * //                            `=---='
- * //
- * //         .............................................
- * //                  佛祖镇楼           BUG辟易
+
  *
- * @author: xiaohuiduan
+ * @author: kevin
  * @data: 2020/2/15 上午1:12
  * @description: 服务端工具
  */
@@ -123,6 +103,8 @@ public class ClientUtil {
             String json = JSON.toJSONString(msg);
             MsgPacket msgPacket = new MsgPacket();
             try {
+                //log.info("开始向 index:{}, 发送消息", index);
+
                 msgPacket.setBody(json.getBytes(MsgPacket.CHARSET));
                 Tio.send(client, msgPacket);
             } catch (UnsupportedEncodingException e) {
@@ -172,9 +154,10 @@ public class ClientUtil {
         ClientUtil.clientPublish(msg);
 
         MsgCollection msgCollection = MsgCollection.getInstance();
-        msg.setMsgType(MsgType.PREPARE);
+        msg.setMsgType(MsgType.PRE_PREPARE);
         msgCollection.getVotePrePrepare().add(msg.getId());
         if (!PbftUtil.checkMsg(msg)) {
+            log.error("msg check 消息不通过");
             return;
         }
         try {

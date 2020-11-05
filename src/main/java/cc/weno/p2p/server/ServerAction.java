@@ -23,29 +23,9 @@ import java.io.UnsupportedEncodingException;
 
 
 /**
- * //                            _ooOoo_
- * //                           o8888888o
- * //                           88" . "88
- * //                           (| -_- |)
- * //                            O\ = /O
- * //                        ____/`---'\____
- * //                      .   ' \\| |// `.
- * //                       / \\||| : |||// \
- * //                     / _||||| -:- |||||- \
- * //                       | | \\\ - /// | |
- * //                     | \_| ''\---/'' | |
- * //                      \ .-\__ `-` ___/-. /
- * //                   ___`. .' /--.--\ `. . __
- * //                ."" '< `.___\_<|>_/___.' >'"".
- * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
- * //                 \ \ `-. \_ __\ /__ _/ .-` / /
- * //         ======`-.____`-.___\_____/___.-`____.-'======
- * //                            `=---='
- * //
- * //         .............................................
- * //                  佛祖镇楼           BUG辟易
+
  *
- * @author: xiaohuiduan
+ * @author: kevin
  * @data: 2020/2/14 下午10:07
  * @description: 服务端的Action
  */
@@ -121,8 +101,8 @@ public class ServerAction {
      * @param msg
      */
     private void prepare(PbftMsg msg) {
-        log.info(msgCollection.getVotePrePrepare().contains(msg) + ">>>>");
         if (!msgCollection.getVotePrePrepare().contains(msg.getId()) || !PbftUtil.checkMsg(msg)) {
+            log.info(msgCollection.getVotePrePrepare().contains(msg) + ">>>>");
             return;
         }
 
